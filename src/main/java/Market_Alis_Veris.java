@@ -1,3 +1,5 @@
+// Basarili Market alış-veriş programı.
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +30,19 @@ public class Market_Alis_Veris {
  * 6. Eğer devam etmek istiyorsa yeniden ürün seçme kısmına yönlendiriniz.
  * 7. Eğer bitirmek istiyorsa ödemeyi kontrol edip para ustu hesaplayarak  programı bitirinzi.
  */
+
+        // Ürün ve fiyat bilgileri tablosu   ***printf***
+        String[] urunlertbl = {"Domates", "Patates", "Biber", "Soğan", "Havuç", "Elma", "Muz", "Çilek", "Kavun", "Üzüm", "Limon"};
+        double[] fiyatlartbl = {2.10, 3.20, 1.50, 2.30, 3.10, 1.20, 1.90, 6.10, 4.30, 2.70, 0.50};
+
+        // Başlıkları yazdır
+        System.out.printf("%-10s %-13s %-10s%n", "No", "Ürün", "Fiyat");
+        System.out.println("====     =======      =========");
+
+        // Ürün ve fiyatları döngüyle tablo formatında yazdır
+        for (int i = 0; i < urunlertbl.length; i++) {
+            System.out.printf("%02d       %-10s     %.2f TL%n", i, urunlertbl[i], fiyatlartbl[i]);
+        }
 
 
         List<String> urunler = new ArrayList<>();
@@ -62,7 +77,7 @@ public class Market_Alis_Veris {
         boolean devam;
 
         do {
-            System.out.println("Seçmek istediğiniz ürünün numarasını giriniz. (0-" + (urunler.size()-1) + ")");
+            System.out.println("Seçmek istediğiniz ürünün numarasını giriniz. (0-" + (urunler.size() - 1) + ")");
             int alinacakUrun = input.nextInt();
 
             String alinacakUrunAdi = urunler.get(alinacakUrun);
@@ -72,7 +87,7 @@ public class Market_Alis_Veris {
             System.out.println(urunler.get(alinacakUrun) + " den Kaç kilo almak istersiniz?");
             int alinacakKilo = input.nextInt();
 
-            double urunTutari = aratutar(alinacakUrunFiyat, alinacakKilo);
+            double urunTutari = alinacakUrunFiyat * alinacakKilo;
             toplamBorc += urunTutari;
             System.out.println("Bu ürün için ödeyeceğiniz tutar: " + urunTutari + " TL");
 
@@ -80,9 +95,9 @@ public class Market_Alis_Veris {
             String alisverisDevamMi = input.next();
 
             devam = alisverisDevamMi.equalsIgnoreCase("Evet");
+        }while (devam);
 
-
-            for (String w : urunler) {
+           /* for (String w : urunler) {
                 if (alinacakUrun == urunler.indexOf(w)) {
                     System.out.println("Seçtiğiniz ürün: " + alinacakUrunAdi);
                 }
@@ -93,14 +108,9 @@ public class Market_Alis_Veris {
                 if (alinacakUrun == fiyatlar.indexOf(w)) {
                     System.out.println("Seçtiğiniz ürün birim/kilo fiyatı: " + alinacakUrunFiyat);
                 }
-            }
+            }*/
 
 
-            double result = aratutar(alinacakUrunFiyat, alinacakKilo);
-            System.out.println(result);
-
-
-        } while (devam);
 
         // Alışverişin sonu, toplam borç gösteriliyor
         System.out.printf("Alışverişinizin toplam borcu: %.2f TL%n", toplamBorc);
@@ -118,10 +128,6 @@ public class Market_Alis_Veris {
         }
     }
 
-    public static double aratutar(double alinacakUrunFiyat, double alinacakKilo) {
 
-        return alinacakUrunFiyat * alinacakKilo;
-
-    }
 
 }
